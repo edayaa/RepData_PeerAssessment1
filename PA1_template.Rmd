@@ -39,8 +39,8 @@ hist(df1$total_steps,col = "green", xlab = "No of Steps taken each Day",
 ```
 ### 3. Mean  number of steps taken each day
 ```{r 3a. Mean  number of steps taken each day, echo=TRUE}
-mean(df1$total_steps)    #10766.19
-median(df1$total_steps)  #10765
+mean(df1$avg_steps)    #37.3826
+median(df1$median_steps)  # 0 
 ```
 ### 4. Time series plot of the average number of steps taken
 ```{r 4. Time series plot of the average number of steps taken, echo=TRUE}
@@ -68,12 +68,19 @@ df_missing_filled <- ddply(dataset_mis_input, .(date), summarise, total_steps = 
 weekdays1 <- c('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
 dataset_mis_input$wday <- factor((weekdays(dataset_mis_input$date) %in% weekdays1), 
          levels=c(FALSE, TRUE), labels=c('weekend', 'weekday'))
-mean(df_missing_filled$total_steps)  # 10766.19
-median(df_missing_filled$total_steps)  # 10766.19
+mean(df_missing_filled$avg_steps)  # 10766.19
+median(df_missing_filled$median_steps)  # 10766.19
 
 ```
-### After imputting the Missing values both Mean & Median values produce the same results. 
-
+### 6c . After imputting the Missing values  
+```{r 6c. Analysis of values after imputting the Missing values , echo=TRUE }
+summary(df1)
+summary(df_missing_filled)
+```
+### Observations 
+##### Median values are avaiable after imputting the values. 
+##### Avg values are close to the values before imputting the missing.
+##### Avg and Median values are same after imputtig the value 
 ### 7. Histogram of the total number of steps taken each day after missing values are imputed
 ```{r 7. Histogram of the total number of steps taken each day after missing values , echo=TRUE}
 hist(df_missing_filled$total_steps,col = "green", xlab = "# of Steps Taken Each Day",
